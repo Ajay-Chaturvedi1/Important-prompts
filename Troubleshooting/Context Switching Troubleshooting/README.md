@@ -59,9 +59,9 @@ Reconfigure your embedded servlet container (Tomcat, Jetty, or Undertow).
 **Action:** For 32 cores, set your max active threads between 64 and 128. If threads run out, let incoming requests queue safely in the network backlog (socket queue) rather than spawning more OS threads.'
 - 2. Implement Virtual Threads (Java 21+) If your platform runs on modern Java, migrate your microservice thread model to Virtual Threads (Project Loom).
 **Why:** Virtual threads are managed by the JVM runtime, not the Linux kernel. You can run millions of virtual threads, and the JVM will multiplex them cleanly onto a tiny pool of carrier threads matching your 32 CPU cores, completely eliminating vmstat context-switch spikes.
-- 3. Adjust RHEL 9 Kernel Scheduler (Optional Tuning)To make the RHEL 9 completely hostile to thread-hogging behavior during unexpected spikes, you can adjust the completely fair scheduler (CFS) tunables via
+- 3. Adjust RHEL 9 Kernel Scheduler (Optional Tuning)To make the RHEL 9 completely hostile to thread-hogging behavior during unexpected spikes, you can adjust the completely fair scheduler (CFS) tunables via sysctl:
 ```bash
-sysctl:bashsysctl -w kernel.sched_min_granularity_ns=10000000
+sysctl -w kernel.sched_min_granularity_ns=10000000
 sysctl -w kernel.sched_wakeup_granularity_ns=15000000
 ```
 Use code with caution.
