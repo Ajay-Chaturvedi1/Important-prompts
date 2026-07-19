@@ -12,8 +12,6 @@ bash (Bourne Again Shell): The most widely used shell on Linux distributions. It
 
 C-shell family:
 csh / tcsh: Syntax similar to C language, popular for interactive features like aliases and job control, but less preferred for scripting due to incompatibilities with Bourne-style scripts.
-
-
 Other notable modern shells include zsh (Z Shell), which extends bash with powerful autocompletion, plugins, and themes (popular with Oh My Zsh framework), and fish (Friendly Interactive Shell), which focuses on user-friendliness with syntax highlighting and simplified scripting.
 Most production Linux systems use bash as the default because of its balance between compatibility and advanced features.
 ---
