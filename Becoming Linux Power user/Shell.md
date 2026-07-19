@@ -45,8 +45,8 @@ The primary types available include Bourne Shell (sh), Bourne Again Shell (bash)
 | Feature | Sh | Bash | Zsh | Fish |
 |---------|----|------|-----|------|
 |Primary Use | Minimal scripting | Default system use | Advanced user desktop | Plug-and-play interactive|
-| Autocompletion | NoneBasic (Tab)| Advanced (Menu-driven)| Intelligent (Autosuggest) |
-| Syntax HighlightingNo|No (requires plugins)|No (requires plugins)|Yes (built-in out of the box) |
+| Autocompletion | None| Basic (Tab)| Advanced (Menu-driven)| Intelligent (Autosuggest) |
+| Syntax Highlighting | No|No (requires plugins)|No (requires plugins)|Yes (built-in out of the box) |
 | Script Compatibility | Base standard | Fully backward compatible | Mostly backward compatible | Completely unique syntax |
 
 
