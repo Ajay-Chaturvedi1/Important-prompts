@@ -66,46 +66,70 @@ The primary types available include Bourne Shell (sh), Bourne Again Shell (bash)
 
 
 # Explain the difference between Environment Variables and Shell (Local) Variables in Linux. How are they created, viewed, and when should you use each?
-The difference between Environment Variables and Shell (Local) Variables lies in their scope—specifically, whether they are passed down to child processes (like scripts or programs launched from that terminal).Key Differences at a GlanceFeatureShell (Local) VariableEnvironment VariableScopeCurrent shell session only.
-Current shell AND all its child processes. InheritanceInvisible to scripts/programs you run. Inherited by scripts/programs you run. Naming ConventionUsually lowercase (by convention). 
-Usually UPPERCASE (by convention).Primary UseTemporary loops, logic, script-only data.System configurations, paths, API keys.How to Create and Modify Them1. Shell (Local) VariablesThese are restricted to the exact terminal window where you type them.Creation: Type the name directly, with no spaces around the equals sign.
+The difference between Environment Variables and Shell (Local) Variables lies in their scope—specifically, whether they are passed down to child processes (like scripts or programs launched from that terminal).
+## Key Differences at a Glance
+| Feature|Shell (Local) Variable|Environment Variable|
+|---------|------------|----------|
+|Scope|Current shell session only.| Current shell AND all its child processes.|
+|Inheritance|Invisible to scripts/programs you run.| Inherited by scripts/programs you run.|
+|Naming Convention|Usually lowercase (by convention).|Usually UPPERCASE (by convention).|
+|Primary Use|Temporary loops, logic, script-only data.|System configurations, paths, API keys.|
+
+## How to Create and Modify Them
+1. Shell (Local) Variables
+    These are restricted to the exact terminal window where you type them.
+- Creation: Type the name directly, with no spaces around the equals sign.
 ```bash
 my_var="Hello World"
 ```
 
-Use code with caution.Verification: If you open a sub-shell by typing bash, this variable will disappear. Typing exit to return to the parent shell makes it visible again.
+- Verification: If you open a sub-shell by typing `bash`, this variable will disappear. Typing `exit` to return to the parent shell makes it visible again.
 
-2. Environment VariablesThese are promoted so that any program started by this terminal can read them.Creation (Method A): Export an existing local variable.
+2. Environment Variables
+These are promoted so that any program started by this terminal can read them.
+Creation (Method A): Export an existing local variable.
 ```bash
 my_var="Hello World"
 export my_var
 ```
-Use code with caution.Creation (Method B): Create and export it in a single step.
+Creation (Method B): Create and export it in a single step.
 ```bash
 export MY_ENV_VAR="Universal Data"
 ```
 
-Use code with caution.Temporary Export: Pass a variable to a single specific command without changing your current shell environment.
+Temporary Export: Pass a variable to a single specific command without changing your current shell environment.
 ```bash
 USER_ID=42 ./run_script.sh
 ```
-Use code with caution.How to View ThemView a single variable: Use the echo command with a $ prefix. Works for both types.bashecho $my_var
-Use code with caution.List all active Environment Variables: Use printenv or env.
+## How to View Them
+View a single variable: Use the `echo` command with a `$` prefix. Works for both types.
+```bash
+echo $my_var
+```
+List all active Environment Variables: Use `printenv` or `env`.
 ```bash
 printenv
-```
 # Or filter for a specific one:
-```bash
 printenv MY_ENV_VAR
 ```
-Use code with caution.List all variables (Local + Environment): Use the set command. Because it outputs thousands of lines, it is best to filter it.bashset | grep my_var
-Use code with caution.Delete a variable: Use unset to wipe it from memory.
+- List all variables (Local + Environment): Use the set command. Because it outputs thousands of lines, it is best to filter it.
+```bash
+set | grep my_var
+```
+Delete a variable: Use unset to wipe it from memory.
 ```bash
 unset my_var
 ```
 
-Use code with caution.When to Use EachUse Shell (Local) Variables When:Writing a for loop inside a script where the iterator index doesn't matter outside the loop. 
-Storing a temporary file path inside a backup script.Holding intermediate mathematical calculations.Use Environment Variables When:Modifying system behavior, like adding a new folder to your binary executable search path (export PATH=$PATH:/new/folder).Passing configuration secrets to applications (e.g., export DATABASE_URL="mongodb://...").Changing terminal behavior globally, like setting your default text editor (export EDITOR="nano").
+## When to Use Each
+### Use Shell (Local) Variables When:
+- Writing a for loop inside a script where the iterator index doesn't matter outside the loop. 
+- Storing a temporary file path inside a backup script.
+- Holding intermediate mathematical calculations.
+### Use Environment Variables When:
+- Modifying system behavior, like adding a new folder to your binary executable search path (`export PATH=$PATH:/new/folder`).
+- Passing configuration secrets to applications (e.g., `export DATABASE_URL="mongodb://..."`).
+- Changing terminal behavior globally, like setting your default text editor (`export EDITOR="nano"`).
 
 # What is the difference between a Login Shell and a Non-Login Shell? When is each type invoked, and why does it matter (especially regarding configuration files)?
 The fundamental difference between a login shell and a non-login shell lies in how they start and which configuration files they read. A login shell builds your entire environment from scratch, while a non-login shell simply inherits the environment already created by a parent process.
